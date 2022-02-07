@@ -1,0 +1,10 @@
+ny_taxi_postgres_data
+terraform/.terraform
+terraform/.terraform.lock.hcl
+terraform/.terraform-version
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+week_1/downloaded_data.csv
+week_1/downloaded_data_zones.csv
+week_1/yellow_tripdata_2021-01.csv
+airflow/logs
