@@ -2,6 +2,7 @@ import datetime
 import os
 import logging
 
+from textwrap import dedent
 from airflow import DAG
 from airflow.utils.dates import days_ago
 from airflow.operators.bash import BashOperator
@@ -21,6 +22,7 @@ path_to_local_home = os.environ.get("AIRFLOW_HOME", "/opt/airflow/")
 parquet_file = dataset_file.replace('.csv', '.parquet')
 BIGQUERY_DATASET = os.environ.get("BIGQUERY_DATASET", 'trips_data_all')
 dataset_file_parq = dataset_file.replace('.csv', '.parquet')
+
 
 def format_to_parquet(src_file):
     if not src_file.endswith('.csv'):
@@ -60,6 +62,7 @@ default_args = {
     "retries": 4,
 }
 
+
 # NOTE: DAG declaration - using a Context Manager (an implicit way)
 with DAG(
     dag_id="data_ingestion_gcs_dag_v1_1",
@@ -98,6 +101,11 @@ with DAG(
         task_id="clean_local_space_task",
         bash_command=f"rm {path_to_local_home}/{dataset_file} {path_to_local_home}/{dataset_file_parq}"
     )
+
+    dag.doc_md = __doc__  # providing that you have a docstring at the beginning of the DAG
+    dag.doc_md = """
+        This is a documentation for the DAG!
+        """
 
     # bigquery_external_table_task = BigQueryCreateExternalTableOperator(
     #     task_id="bigquery_external_table_task",
