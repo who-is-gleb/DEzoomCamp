@@ -8,3 +8,5 @@ week_1/downloaded_data.csv
 week_1/downloaded_data_zones.csv
 week_1/yellow_tripdata_2021-01.csv
 airflow/logs
+.idea
+*.pyc
